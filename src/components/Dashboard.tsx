@@ -311,7 +311,7 @@ export function Dashboard({ token }: DashboardProps) {
       {/* Header */}
       <div>
         <h2 className="text-slate-900 text-xl font-semibold">Dashboard</h2>
-        <p className="text-sm text-slate-600">Overview pengiriman email pengingat uang kas</p>
+        <p className="text-sm text-slate-600">Overview pengiriman email</p>
       </div>
 
       {/* MAIN STATS: MEMBER & INVOICE */}
