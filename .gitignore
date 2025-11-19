@@ -1,0 +1,47 @@
+# ───────────────────────────────
+#  FRONTEND (React + Vite) IGNORE
+# ───────────────────────────────
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Local env files
+.env
+.env.local
+.env.development.local
+.env.production.local
+.env.test.local
+
+# Vite cache
+.vite/
+
+# Editor folders
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Mac / Linux / Windows system files
+.DS_Store
+Thumbs.db
+
+# Optional cache directories
+.cache/
+.eslintcache/
+.parcel-cache/
+
+# TypeScript
+*.tsbuildinfo
+
+# Test coverage
+coverage/
+
+# Local preview output
+vite-out/
