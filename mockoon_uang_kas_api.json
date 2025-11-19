@@ -1,0 +1,323 @@
+{
+  "source": "mockoon:1.17.0",
+  "data": {
+    "uuid": "2f7d6f06-0000-4f3a-9c3a-000000000002",
+    "name": "Uang Kas API (mock full)",
+    "endpointPrefix": "",
+    "port": 8080,
+    "routes": [
+      {
+        "uuid": "route-login-0001",
+        "documentation": "Returns a successful login response for testing.",
+        "method": "post",
+        "endpoint": "/api/auth/login",
+        "responses": [
+          {
+            "uuid": "resp-login-success-0001",
+            "label": "Login success for admin",
+            "status": 200,
+            "body": "{\n  \"expires_in\": 3600,\n  \"role\": \"ADMIN\",\n  \"token\": \"mock-token-admin-123\"\n}",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              {
+                "key": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization"
+              },
+              {
+                "key": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              }
+            ],
+            "latency": 0,
+            "enabled": true
+          },
+          {
+            "uuid": "resp-login-fail-0001",
+            "label": "Login fail",
+            "status": 401,
+            "body": "{\n  \"message\": \"Invalid username or password\"\n}",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              {
+                "key": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization"
+              },
+              {
+                "key": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true,
+        "rules": [
+          {
+            "target": "body",
+            "modifier": "jsonpath",
+            "operator": "equals",
+            "value": "admin",
+            "key": "$.username",
+            "order": 0
+          },
+          {
+            "target": "body",
+            "modifier": "jsonpath",
+            "operator": "equals",
+            "value": "admin123",
+            "key": "$.password",
+            "order": 1
+          }
+        ]
+      },
+      {
+        "uuid": "route-logout-0001",
+        "documentation": "Returns logout success message.",
+        "method": "post",
+        "endpoint": "/api/auth/logout",
+        "responses": [
+          {
+            "uuid": "resp-logout-success-0001",
+            "label": "Logout success",
+            "status": 200,
+            "body": "{\n  \"message\": \"Logged out successfully\"\n}",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              {
+                "key": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization"
+              },
+              {
+                "key": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-members-get-0001",
+        "documentation": "Return list of members",
+        "method": "get",
+        "endpoint": "/api/members",
+        "responses": [
+          {
+            "uuid": "resp-members-list-0001",
+            "label": "Members list",
+            "status": 200,
+            "body": "[\n  { \"id\": \"1\", \"nama\": \"Ahmad Suryadi\", \"noHp\": \"081234567890\", \"status\": \"active\", \"createdAt\": \"2024-01-15\" },\n  { \"id\": \"2\", \"nama\": \"Siti Nurhaliza\", \"noHp\": \"081234567891\", \"status\": \"active\", \"createdAt\": \"2024-02-01\" },\n  { \"id\": \"3\", \"nama\": \"Budi Santoso\", \"noHp\": \"081234567892\", \"status\": \"active\", \"createdAt\": \"2024-01-20\" }\n]",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-member-get-0001",
+        "documentation": "Return member by id",
+        "method": "get",
+        "endpoint": "/api/members/:id",
+        "responses": [
+          {
+            "uuid": "resp-member-0001",
+            "label": "Member by id",
+            "status": 200,
+            "body": "{ \"id\": \"1\", \"nama\": \"Ahmad Suryadi\", \"noHp\": \"081234567890\", \"status\": \"active\", \"createdAt\": \"2024-01-15\" }",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-members-create-0001",
+        "documentation": "Create member",
+        "method": "post",
+        "endpoint": "/api/members",
+        "responses": [
+          {
+            "uuid": "resp-members-create-0001",
+            "label": "Create member success",
+            "status": 201,
+            "body": "{ \"id\": \"99\", \"nama\": \"{{ request.body.nama || 'New Member' }}\", \"noHp\": \"{{ request.body.noHp || '' }}\", \"status\": \"{{ request.body.status || 'active' }}\", \"createdAt\": \"2025-01-01\" }",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-members-update-0001",
+        "documentation": "Update member",
+        "method": "put",
+        "endpoint": "/api/members/:id",
+        "responses": [
+          {
+            "uuid": "resp-members-update-0001",
+            "label": "Update member success",
+            "status": 200,
+            "body": "{ \"id\": \"{{ urlParams.id }}\", \"nama\": \"{{ request.body.nama || 'Updated' }}\", \"noHp\": \"{{ request.body.noHp || '' }}\", \"status\": \"{{ request.body.status || 'active' }}\", \"createdAt\": \"2025-01-01\" }",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-members-delete-0001",
+        "documentation": "Delete member",
+        "method": "delete",
+        "endpoint": "/api/members/:id",
+        "responses": [
+          {
+            "uuid": "resp-members-delete-0001",
+            "label": "Delete success",
+            "status": 200,
+            "body": "{ \"success\": true }",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-invoices-get-0001",
+        "documentation": "Return list of invoices",
+        "method": "get",
+        "endpoint": "/api/invoices",
+        "responses": [
+          {
+            "uuid": "resp-invoices-list-0001",
+            "label": "Invoices list",
+            "status": 200,
+            "body": "[\n  { \"id\": \"1\", \"memberId\": \"1\", \"memberName\": \"Ahmad Suryadi\", \"periode\": \"November 2024\", \"amount\": 50000, \"status\": \"paid\", \"buktiPembayaran\": \"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800\", \"createdAt\": \"2024-11-01\", \"paidAt\": \"2024-11-02\" },\n  { \"id\": \"2\", \"memberId\": \"2\", \"memberName\": \"Siti Nurhaliza\", \"periode\": \"November 2024\", \"amount\": 50000, \"status\": \"unpaid\", \"createdAt\": \"2024-11-03\" }\n]",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-invoice-get-0001",
+        "documentation": "Return invoice by id",
+        "method": "get",
+        "endpoint": "/api/invoices/:id",
+        "responses": [
+          {
+            "uuid": "resp-invoice-0001",
+            "label": "Invoice by id",
+            "status": 200,
+            "body": "{ \"id\": \"1\", \"memberId\": \"1\", \"memberName\": \"Ahmad Suryadi\", \"periode\": \"November 2024\", \"amount\": 50000, \"status\": \"paid\", \"buktiPembayaran\": \"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800\", \"createdAt\": \"2024-11-01\", \"paidAt\": \"2024-11-02\" }",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-invoices-create-0001",
+        "documentation": "Create invoice",
+        "method": "post",
+        "endpoint": "/api/invoices",
+        "responses": [
+          {
+            "uuid": "resp-invoices-create-0001",
+            "label": "Create invoice",
+            "status": 201,
+            "body": "{ \"id\": \"99\", \"memberId\": \"{{ request.body.memberId }}\", \"memberName\": \"{{ request.body.memberName }}\", \"periode\": \"{{ request.body.periode }}\", \"amount\": {{ request.body.amount }}, \"status\": \"{{ request.body.status || 'unpaid' }}\", \"createdAt\": \"2025-01-01\" }",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-invoices-approve-0001",
+        "documentation": "Approve invoice",
+        "method": "post",
+        "endpoint": "/api/invoices/:id/approve",
+        "responses": [
+          {
+            "uuid": "resp-invoices-approve-0001",
+            "label": "Approve success",
+            "status": 200,
+            "body": "{ \"id\": \"{{ urlParams.id }}\", \"status\": \"paid\", \"paidAt\": \"2025-01-01\" }",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      },
+      {
+        "uuid": "route-invoices-upload-0001",
+        "documentation": "Upload payment proof",
+        "method": "post",
+        "endpoint": "/api/invoices/:id/upload",
+        "responses": [
+          {
+            "uuid": "resp-invoices-upload-0001",
+            "label": "Upload success",
+            "status": 200,
+            "body": "{ \"id\": \"{{ urlParams.id }}\", \"buktiPembayaran\": \"https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800\" }",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              {
+                "key": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization"
+              }
+            ],
+            "latency": 500,
+            "enabled": true
+          }
+        ],
+        "enabled": true
+      }
+    ],
+    "latency": 0,
+    "cors": true
+  }
+}

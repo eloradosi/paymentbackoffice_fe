@@ -1,0 +1,64 @@
+{
+  "source": "mockoon:1.17.0",
+  "data": {
+    "uuid": "notif-env-0001-0000-0000-000000000001",
+    "name": "Uang Kas - Notifications Mock",
+    "endpointPrefix": "",
+    "port": 8080,
+    "routes": [
+      {
+        "uuid": "route-notifications-0001",
+        "documentation": "List notification logs used by NotificationLog component.",
+        "method": "get",
+        "endpoint": "/api/notifications",
+        "responses": [
+          {
+            "uuid": "resp-notifs-list-0001",
+            "label": "Notifications list (default)",
+            "status": 200,
+            "body": "[\n  {\n    \"id\": \"n-1\",\n    \"to\": \"081234567890\",\n    \"timestamp\": \"2025-11-15T08:05:00.000Z\",\n    \"status\": \"sent\",\n    \"message\": \"Pembayaran Anda untuk periode 2025-10 telah diterima.\"\n  },\n  {\n    \"id\": \"n-2\",\n    \"to\": \"081298765432\",\n    \"timestamp\": \"2025-11-15T08:06:30.000Z\",\n    \"status\": \"failed\",\n    \"message\": \"Gagal mengirim notifikasi: nomor tidak aktif.\"\n  },\n  {\n    \"id\": \"n-3\",\n    \"to\": \"081212121212\",\n    \"timestamp\": \"2025-11-15T08:10:12.000Z\",\n    \"status\": \"pending\",\n    \"message\": \"Notifikasi sedang diproses.\"\n  }\n]",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" },
+              {
+                "key": "Access-Control-Allow-Headers",
+                "value": "Content-Type, Authorization"
+              },
+              {
+                "key": "Access-Control-Allow-Methods",
+                "value": "GET, POST, OPTIONS"
+              }
+            ],
+            "latency": 0,
+            "enabled": true
+          },
+          {
+            "uuid": "resp-notifs-empty-0001",
+            "label": "Notifications empty (query ?empty=1)",
+            "status": 200,
+            "body": "[]",
+            "headers": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Access-Control-Allow-Origin", "value": "*" }
+            ],
+            "latency": 0,
+            "enabled": true
+          }
+        ],
+        "enabled": true,
+        "rules": [
+          {
+            "target": "query",
+            "modifier": "raw",
+            "operator": "equals",
+            "value": "1",
+            "key": "empty",
+            "order": 0
+          }
+        ]
+      }
+    ],
+    "latency": 0,
+    "cors": true
+  }
+}
