@@ -53,18 +53,5 @@ export default defineConfig({
     target: 'esnext',
     outDir: 'build',
   },
-  server: {
-    port: 3000,
-    open: true,
-    proxy: {
-      // Proxy API requests to the backend during development to avoid CORS
-      '/api': {
-        target: 'http://localhost:8080',
-        changeOrigin: true,
-        secure: false,
-        // optional: rewrite if your backend expects a different path
-        // rewrite: (path) => path.replace(/^\/api/, '/api')
-      },
-    },
-  },
+
 });
