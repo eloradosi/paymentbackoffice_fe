@@ -1,6 +1,6 @@
 // API functions for Quarkus backend with JWT
 
-const API_BASE_URL = 'http://10.63.96.228/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://144.126.230.234:8081/api';
 
 // Helper to get auth headers
 const getAuthHeaders = (token: string) => ({

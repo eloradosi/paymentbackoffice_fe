@@ -5,11 +5,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL:-http://144.126.230.234:8081/api}
     container_name: uangkas-backoffice
     ports:
-      - "8080:80"
-    environment:
-      - VITE_API_BASE_URL=${VITE_API_BASE_URL:-http://144.126.230.234:8081/api}
+      - "82:80"
     restart: unless-stopped
     networks:
       - app-network
